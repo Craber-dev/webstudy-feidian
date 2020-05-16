@@ -1,0 +1,204 @@
+*{
+    padding:0;
+    margin:0;
+}
+body{
+    font-size: 12px;
+}
+.header{
+    height: 62px;
+    width: 100%;
+    line-height: 62px;
+    background: #eff4fa;
+    border-bottom: 1px solid #d6dfea;
+}
+.header img{
+    width: 182px;
+    height: 35px;
+    margin-left: 40px;
+    margin-top: 14px;
+}
+.header nav{
+    text-align: right;
+    margin-top: -75px;
+    margin-right: 40px;
+    letter-spacing: 0.5px;
+}
+.header nav a{
+    color: #1d5494;
+    text-decoration: none;
+}
+.header nav a:hover{
+    text-decoration: underline;
+}
+
+.content{
+    width: 915px;
+    height: 390px;
+    margin:32px auto 92px auto;
+    padding-top: 40px;
+    background: white;
+}
+.content .text{
+    float: left;
+    position: relative;
+    width: 520px;
+    height: 151px;
+    padding-top: 25px;
+    line-height: 200%;
+}
+.content .text h1{
+    color: #6f95c8;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-family: "lucida Grande",Verdana,"Microsoft YaHei";
+    font-weight: normal;
+}
+.content .text p{
+    display: block;
+    font-size: 14px;
+    font-family: "lucida Grande",Verdana,"Microsoft YaHei";
+    font-weight: normal;
+    line-height: 24px;
+}
+.content .pic{
+    float: left;
+    position: absolute;
+    width: 520px;
+    height: 400px;
+    background-repeat: no-repeat;
+    margin-top: auto;
+    margin-right: auto;
+}
+.content .login{
+    float: left;
+    width: 334px;
+    height: 388px;
+    margin-left: 59px;
+    border: 1px solid #a0b1c4;
+    border-radius: 5px;
+}
+.content .login .sidebar{
+    border-bottom: 1px solid #a0b1c4;
+    height: 50px;
+    background: #f9fbfe;
+    line-height: 50px;
+}
+.content .login ul li{
+    list-style-type: none;
+    display: block;
+    width: 110px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: "微软雅黑";
+}
+.content .login ul .tab1{
+    text-align: left;
+    float: left;
+    margin-left: 52px;
+    cursor: pointer;
+    color: gray;
+}
+.content .login ul .tab2{
+    text-align: right;
+    float: right;
+    margin-right: 52px;
+    cursor: pointer;
+    color: black;
+}
+.content .login .acount{
+    margin: 34px 24px 0 24px;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #96a5b4;
+    width: 230px;
+    height: 18px;
+    border-radius: 2px;
+    line-height: 16px;
+    font-family: Verdana,Tahoma,Arial;
+    font-size: 14px;
+}
+.content .login .password{
+    margin: 10px 24px 0 24px;
+    padding: 10px 12px 10px 10px;
+    border: 1px solid #96a5b4;
+    width: 258px;
+    height: 16px;
+    border-radius: 2px;
+    line-height: 18px;
+    font-family: Verdana,Tahoma,Arial;
+    font-size: 14px;
+}
+.content .login .checkbox{
+    margin: 23px 5px 0 24px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #96a5b4;
+    background-color: white;
+    position: relative;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    float: left;
+}
+.content .login .checkbox +label{
+    margin: 23px 0 0 0;
+    height: 18px;
+    line-height: 18px;
+    font-family: Tahoma,Verdana,Arial,宋体;
+    font-size: 12px;
+    display: block;
+    cursor: pointer;
+    overflow: hidden;
+}
+.content .login p{
+    margin-top: 23px;
+    margin-left: 5px;
+    float: left;
+    height: 18px;
+}
+.content .login .submit{
+    margin: 0 24px 0 24px;
+    height: 40px;
+    line-height: 39px;
+    width: 282px;
+    background: cornflowerblue;
+    border: cornflowerblue;
+    font: 400 18px Arial;
+    cursor: pointer;
+    color: white;
+}
+.content .login .forget{
+    float: right;
+    margin-top: 80px;
+    margin-right: 24px;
+}
+.content .login a{
+    color: #1d5494;
+    text-decoration: none;
+}
+.content .login a:hover{
+    text-decoration: underline;
+}
+
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 36px;
+    line-height: 36px;
+    border-top: 1px solid #d6dfea;
+    background: #eff4fa;
+    text-align: center;
+    color: #b6b6b6;
+    letter-spacing: 0.5px;
+}
+.footer a{
+    color: #1d5494;
+    text-decoration: none;
+}
+.footer a:hover{
+    text-decoration: underline;
+}
