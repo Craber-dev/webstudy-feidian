@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/user-style.css">
+    <link rel="icon" href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596742331604&di=3cd70eebb4c70b5196277c47392a54eb&imgtype=0&src=http%3A%2F%2Fimg3.stockfresh.com%2Ffiles%2Fc%2Fcidepix%2Fm%2F26%2F7731415_stock-vector-abstract-symbol-of-letter-c.jpg">
+    <title>Craber账户管理系统</title>
+</head>
+<script src="../js/Ajax.js"></script>
+<script>
+    var LoadCode;
+    var UserData;
+</script>
+<body>
+    <div class="header">
+        <script>
+            var sourceUrl = "file:///C:/Users/ASUS/Desktop/signup/signup/html/user.html?loadcode=";
+            var loadCode = window.location.href.slice(sourceUrl.length);
+            LoadCode = loadCode;
+            ajax({
+                url:"http://localhost:8080/LoadUser",
+                method:"post",
+                data:{loadCode:loadCode},
+                success:(res) => {
+                    const {code,userData} = res;
+                    if(code == 0){
+                        UserData = userData;
+                        console.log(UserData);
+                        LoadPageMsg(UserData);
+                    }
+                    else
+                        alert("加载用户信息失败");
+                }
+            });
+
+            function LoadPageMsg(UserData){
+                document.getElementById("user-name").innerHTML = UserData.nickName;
+            }
+        </script>
+        <a class="title-1">Craber</a><a class="title-2">.com</a>
+        <div class="status-bar">
+            <a class="welcome-text">欢迎您，</a><a id="user-name" class="user-name"></a><button onclick="Offline()" class="offline">退出登录</button>
+            <script>
+                function Offline(){
+                    if(confirm("确定要退出吗？"))
+                        ajax({
+                            url:"http://localhost:8080/Offline",
+                            method:"post",
+                            data:{account:UserData.account,loadCode:LoadCode},
+                            success:(res) => {
+                                const {code} = res;
+                                if(code == 0)
+                                    window.location.href = "./index.html";
+                                else
+                                    alert("退出登录失败！");
+                            }
+                        });
+                }
+            </script>
+        </div>
+    </div>
+    <div class="content">
+        <ul class="mods-bar">
+            <li onclick="ModeUserData()" id="item-UserData" class="mode-item">个人信息</li>
+            <script>
+                function ModeUserData(){
+                    document.getElementById('item-UserData').className = 'mode-item now-item';
+                    var dataRows = document.getElementsByClassName("data-row");
+                    dataRows[0].innerHTML = '<a class="data-text">昵称:</a><input type="text" id="nickName-bar" class="data-bar changable" disabled="disabled"><a class="data-text">姓名:</a><input type="text" id="name-bar" class="data-bar" disabled="disabled">';
+                    dataRows[1].innerHTML = '<a class="data-text">CID:</a><input type="text" id="account-bar" class="data-bar" disabled="disabled"><a class="data-text">学号:</a><input type="text" id="stuid-bar" class="data-bar" disabled="disabled">';
+                    dataRows[2].innerHTML = '<a class="data-text">年级:</a><input type="text" id="grade-bar" class="data-bar" disabled="disabled"><a class="data-text">专业:</a><input type="text" id="major-bar" class="data-bar" disabled="disabled"><a class="data-text">班级:</a><input type="text" id="class-bar" class="data-bar" disabled="disabled">';
+                    dataRows[3].innerHTML = '<a class="data-text">邮箱:</a><input type="email" id="email-bar" class="data-bar changable" disabled="disabled">';
+                    dataRows[4].style.textAlign = "center";
+                    dataRows[4].innerHTML = '<button onclick="ChangeData()" id="change-btn" class="modif-btn change">修改</button>';
+                    document.getElementById("nickName-bar").value = UserData.nickName;
+                    document.getElementById("name-bar").value = UserData.name;
+                    document.getElementById("account-bar").value = UserData.account;
+                    document.getElementById("stuid-bar").value = UserData.stuid;
+                    document.getElementById("grade-bar").value = UserData.grade;
+                    document.getElementById("major-bar").value = UserData.major;
+                    document.getElementById("class-bar").value = UserData.class;
+                    document.getElementById("email-bar").value = UserData.email != "unknown"?UserData.email:"";
+                }
+                function ChangeData(){
+                    var dataRows = document.getElementsByClassName("data-row");
+                    var ChangableDatas = document.getElementsByClassName("changable");
+                    var button = document.getElementById("change-btn");
+                    for(var i=0;i<ChangableDatas.length;i++){
+                        ChangableDatas[i].disabled = false;
+                        ChangableDatas[i].style.borderColor = "#2ba3db";
+                    }
+                    button.remove();
+                    dataRows[4].innerHTML = '<button onclick="UpdateData()" id="save-btn" class="modif-btn save">保存</button>';
+                }
+                function UpdateData(){
+                    ajax({
+                        url:"http://localhost:8080/Update",
+                        method:"post",
+                        data:{account:UserData.account,nickName:document.getElementById("nickName-bar").value,email:document.getElementById("email-bar").value},
+                        success:(res) => {
+                            const {code} = res;
+                            if(code == 0){
+                                var dataRows = document.getElementsByClassName("data-row");
+                                var ChangableDatas = document.getElementsByClassName("changable");
+                                for(var i=0;i<ChangableDatas.length;i++){
+                                    ChangableDatas[i].disabled = "disabled";
+                                    ChangableDatas[i].style.borderColor = "#c9c9c9";
+                                }
+                                UserData.nickName = document.getElementById("nickName-bar").value;
+                                UserData.email = document.getElementById("email-bar").value;
+                                document.getElementById("save-btn").remove();
+                                dataRows[4].innerHTML = '<button onclick="ChangeData()" id="change-btn" class="modif-btn change">修改</button>';
+                                LoadPageMsg(UserData);
+                                alert("保存成功！");
+                            }
+                            else
+                                alert("保存失败！");
+                        }
+                    });
+                }
+            </script>
+            <li class="mode-item">敬请期待</li>
+        </ul>
+        <div id="UI-bar" class="Interface">
+            <p class="data-row odd-row"></p>
+            <p class="data-row even-row"></p>
+            <p class="data-row odd-row"></p>
+            <p class="data-row even-row"></p>
+            <p class="data-row odd-row"></p>
+            <p class="data-row even-row"></p>
+            <p class="data-row odd-row"></p>
+            <p class="data-row even-row"></p>
+            <p class="data-row odd-row"></p>
+            <p class="data-row even-row"></p>
+            <p class="data-row odd-row"></p>
+            <p class="data-row even-row"></p>
+        </div>
+    </div>
+    <div class="footer">
+        <p class="author">Made by Craber</p>
+    </div>
+</body>
+</html>

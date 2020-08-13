@@ -1,0 +1,86 @@
+.content .signup-bar{
+    width: 582px;
+    height: 392px;
+    margin: 0 auto 0 auto;
+    padding: 5px 0 100px 0;
+}
+
+.signup-main-bar{
+    width: 500px;
+    height: 450px;
+    box-shadow: 0 0 22px #888888;
+    border: 1px solid #a0b1c4;
+    background: #ffffff;
+    padding: 40px;
+    padding-top: 20px;
+    padding-bottom: 0;
+    border-radius: 8px;
+}
+
+.signup-text{
+    position: relative;
+    margin: 15px 0 15px 0;
+    height: 70px;
+}
+
+.AuthCode{
+    width: 500px;
+    margin: 15px 0 15px 0;
+    height: 70px;
+}
+
+.input-authcode{
+    float: left;
+    height: 66px;
+    width: 236px;
+    padding: 0 25px 0 25px;
+    font-size: 22px;
+    border: 2px solid #c9c9c9;
+    border-radius: 5px;
+}
+
+.input-authcode:focus{
+    outline: none;
+    border-color: #2ba3db;
+}
+
+.warning-text{
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    text-align: right;
+    line-height: 66px;
+    font-size: 18px;
+}
+
+.auth-warning{
+    right: 220px;
+}
+
+.pic-authcode{
+    height: 68px;
+    width: 198px;
+    margin-left: 10px;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    top: 0;
+}
+
+.pic-authcode:hover{
+    cursor: pointer;
+}
+
+.signup-btn{
+    width: 498px;
+    height: 68px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #ffffff;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    background: #2ba3db;
+}
+
+.signup-btn:hover{
+    background: #1883b4;
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/login-style.css">
+    <link rel="stylesheet" href="../style/signup-style.css">
+    <link rel="icon" href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596742331604&di=3cd70eebb4c70b5196277c47392a54eb&imgtype=0&src=http%3A%2F%2Fimg3.stockfresh.com%2Ffiles%2Fc%2Fcidepix%2Fm%2F26%2F7731415_stock-vector-abstract-symbol-of-letter-c.jpg">
+    <title>注册Craber账号</title>
+</head>
+<script src="../js/Ajax.js"></script>
+<script>
+    function RecoverBorder(HtmlElement){
+        HtmlElement.addEventListener("focus",() => {HtmlElement.style.borderColor = "#2ba3db";});
+        HtmlElement.addEventListener("focusout",() => {HtmlElement.style.borderColor = "#c9c9c9";});
+    }
+    function ChangeBorder(HtmlElement){
+        HtmlElement.removeEventListener("focus",() => {HtmlElement.style.borderColor = "#2ba3db";});
+        HtmlElement.removeEventListener("focusout",() => {HtmlElement.style.borderColor = "#c9c9c9";});
+    }
+</script>
+<body>
+    <div class="header">
+        <p class="logo-text">
+            <a class="Craber">Craber</a><a class="com">.com</a>
+        </p>
+    </div>
+    <div class="content">
+        <div class="signup-bar">
+            <div class="signup-main-bar">
+                <p class="signup-text">
+                    <input type="text" id="student-id" class="input-bar" onchange="VerifyStuId()" placeholder="请输入学号，可用于登录"><a id="stuid-text" class="warning-text"></a>
+                    <script>
+                        var StuIdPass = false;
+                        function VerifyStuId(){
+                            var stuid = document.getElementById("student-id");
+                            var SidText = document.getElementById("stuid-text")
+                            if(String(stuid.value)==="")
+                            {
+                                RecoverBorder(stuid);
+                                SidText.innerHTML = "";
+                                return;
+                            }
+                            else
+                                ajax({
+                                    url:"http://localhost:8080/ConfirmId",
+                                    method:"get",
+                                    params:{sid:String(stuid.value)},
+                                    success:(res) =>{
+                                        const {code,flag} = res;
+                                        if(code === 0){
+                                            if(flag == 1){
+                                                ChangeBorder(stuid);
+                                                stuid.style.borderColor = "green";
+                                                SidText.innerHTML = "验证通过";
+                                                SidText.style.color = "green";
+                                                StuIdPass = true;
+                                            }
+                                            else if(flag == 0){
+                                                ChangeBorder(stuid);
+                                                stuid.style.borderColor = "red";
+                                                SidText.innerHTML = "查无此人";
+                                                SidText.style.color = "red";
+                                            }
+                                            else{
+                                                ChangeBorder(stuid);
+                                                stuid.style.borderColor = "red";
+                                                SidText.innerHTML = "该学号已注册账号";
+                                                SidText.style.color = "red";
+                                            }
+                                        }
+                                        else
+                                            alert("学生信息查询失败");
+                                    }
+                                });
+                        }
+                    </script>
+                </p>
+                <p class="signup-text">
+                    <input type="password" id="password-first" class="input-bar" onchange="VerifyPassword()" placeholder="请设置登录密码" title="密码应为8-18位，由数字与字母组成"><a id="pwf_text" class="warning-text"></a>
+                    <script>
+                        function VerifyPassword(){
+                            var pw_input = document.getElementById("password-first")
+                            var warning_text = document.getElementById("pwf_text");
+                            var password = String(pw_input.value);
+                            var CodeList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                            if(password.length == 0)
+                            {
+                                RecoverBorder(pw_input);
+                                warning_text.innerHTML = "";
+                                return;
+                            }
+                            else if(password.length>18 || password.length<8)
+                            {
+                                ChangeBorder(pw_input);
+                                pw_input.style.borderColor = "red";
+                                warning_text.innerHTML = "长度不符合要求";
+                                warning_text.style.color = "red";
+                                return;
+                            }
+                            else
+                            {
+                                for(var i=0;i<password.length;i++)
+                                    if(CodeList.indexOf(password[i]) == -1)
+                                    {
+                                        ChangeBorder(pw_input);
+                                        pw_input.style.borderColor = "red";
+                                        warning_text.innerHTML = "含有非法符号";
+                                        warning_text.style.color = "red";
+                                        return;
+                                    }
+                            }
+                            ChangeBorder(pw_input);
+                            pw_input.style.borderColor = "green";
+                            warning_text.innerHTML = "验证通过";
+                            warning_text.style.color = "green";
+                        }
+                    </script>
+                </p>
+                <p class="signup-text">
+                    <input type="password" id="password-second" class="input-bar" onchange="SamePassword()" placeholder="请再次输入登录密码" title="重新输入您所设置的密码"><a id="pws_text" class="warning-text"></a>
+                    <script>
+                        var PasswordPass = false;
+                        function SamePassword(){
+                            var pw_f = document.getElementById("password-first"),pw_s = document.getElementById("password-second");
+                            var pwt_f = String(pw_f.value),pwt_s = String(pw_s.value);
+                            var warning_text = document.getElementById("pws_text");
+                            if(pwt_s.length == 0){
+                                RecoverBorder(pw_s);
+                                warning_text.innerHTML = "";
+                                return;
+                            }
+                            else if(pwt_f === pwt_s){
+                                    ChangeBorder(pw_s);
+                                    pw_s.style.borderColor = "green";
+                                    warning_text.innerHTML = "验证通过";
+                                    warning_text.style.color = "green";
+                                    PasswordPass = true;
+                                    return;
+                                }
+                                else{
+                                    ChangeBorder(pw_s);
+                                    pw_s.style.borderColor = "red";
+                                    warning_text.innerHTML = "两次输入不一致";
+                                    warning_text.style.color = "red";
+                                    return;
+                                }
+                        }
+                    </script>
+                </p>
+                <p class="AuthCode">
+                    <input type="text" id="auth-code-input" oninput="document.getElementById('auth-code-input').style.borderColor = '#c9c9c9'" class="input-authcode" placeholder="验证码，不区分大小写"><canvas id="auth-code" onclick="newAuthCode()" class="pic-authcode"></canvas><a id="auth-text" class="warning-text auth-warning"></a>
+                    <script src="../js/AuthCode.js"></script>
+                </p>
+                <button class="signup-btn" onclick="Register()">注&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+                <script>
+                    function Register(){
+                        if(!PasswordPass || !StuIdPass)
+                            alert("信息不合法！");
+                        else if(!VerifyAuth(AuthCode))
+                        {
+                            alert("验证码错误！");
+                            newAuthCode();
+                            document.getElementById("auth-code-input").value = "";
+                        }
+                        else
+                        {
+                            var NickName = prompt("请设置您的昵称");
+                            ajax({
+                                url:"http://localhost:8080/Register",
+                                method:"post",
+                                data:{sid:String(document.getElementById("student-id").value),password:String(document.getElementById("password-second").value),nickName:NickName},
+                                success:(res) => {
+                                    const {code,account} = res;
+                                    if(code === 0)
+                                    {
+                                        alert(`尊敬的${NickName}，您已注册成功！\n您的账号为： ${account}\n您的密码为： ${String(document.getElementById("password-second").value)}\n请牢记！`);
+                                        window.location.href = "./index.html";
+                                    }
+                                    else
+                                        alert("注册失败");
+                                }
+                            });
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <a class="auther">Made by Craber</a>
+    </div>
+</body>
+</html>

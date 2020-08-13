@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+button:focus{
+    outline: none;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.header{
+    width: 100%;
+    height: 150px;
+    line-height: 150px;
+    background-image: linear-gradient(to bottom,#2ba3db,#f3f3f3);
+}
+
+.header .logo-text{
+    text-align: center;
+    padding-left: 25px;
+}
+
+.Craber{
+    font-size: 60px;
+    color: #ffffff;
+}
+
+.com{
+    font-size: 35px;
+    color: #000000;
+}
+
+.content{
+    background-image: linear-gradient(to bottom,#f3f3f3,#fafafa);
+}
+
+.content .login-bar{
+    width: 582px;
+    height: 342px;
+    margin: 0 auto 0 auto;
+    padding: 80px 0 100px 0;
+}
+
+.main-bar{
+    width: 500px;
+    height: 300px;
+    box-shadow: 0 0 22px #888888;
+    border: 1px solid #a0b1c4;
+    background: #ffffff;
+    padding: 40px;
+    padding-top: 20px;
+    padding-bottom: 0;
+    border-radius: 8px;
+}
+
+.login-text{
+    margin: 20px 0 20px 0;
+    height: 70px;
+}
+
+.input-bar{
+    height: 66px;
+    width: 396px;
+    padding: 0 75px 0 25px;
+    font-size: 22px;
+    border: 2px solid #c9c9c9;
+    border-radius: 5px;
+}
+
+.input-bar:focus{
+    outline: none;
+    border-color: #2ba3db;
+}
+
+.log-in{
+    float: left;
+    width: 323px;
+    height: 68px;
+    margin-right: 15px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #ffffff;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    background: #2ba3db;
+}
+
+.sign-up{
+    float: right;
+    width: 143px;
+    height: 68px;
+    margin-left: 15px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #ffffff;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+}
+
+.login-btn{
+    background: #2ba3db;
+}
+
+.login-btn:hover{
+    background: #1883b4;
+}
+
+.footer{
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    background-image: linear-gradient(to bottom,#fafafa,#2ba3db);
+}
+
+.auther{
+    font-size: 20px;
+    -webkit-text-stroke: 0.5px #f3f3f3;
+    color: #e2e2e2;
+}
